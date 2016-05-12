@@ -22,7 +22,7 @@ abstract public class BaseSwipeCards extends BaseListView {
 
     private boolean firstItemIn = false;
 
-    private ProgressBar mProgressBar;
+    private View mProgressBar;
     private SwipeFlingAdapterView mFlingAdapterView;
     protected void garbageCollectorCall()
     {
@@ -66,7 +66,7 @@ abstract public class BaseSwipeCards extends BaseListView {
 
 
         if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= (ProgressBar)mRootView.findViewById(R.id.progressBar);
+            mProgressBar= mRootView.findViewById(R.id.progressBar);
 
 
         mFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {

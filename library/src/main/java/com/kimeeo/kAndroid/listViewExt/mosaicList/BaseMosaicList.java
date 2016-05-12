@@ -24,7 +24,7 @@ abstract public class BaseMosaicList extends BaseListView implements OnItemClick
 
     private boolean firstItemIn = false;
     private boolean firstDataIn = true;
-    private ProgressBar mProgressBar;
+    private View mProgressBar;
     private MosaicLayout mMosaicLayout;
 
     public MosaicLayout getMosaicLayout() {
@@ -69,7 +69,7 @@ abstract public class BaseMosaicList extends BaseListView implements OnItemClick
 
 
         if (mRootView.findViewById(R.id.progressBar) != null)
-            mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
+            mProgressBar = mRootView.findViewById(R.id.progressBar);
 
 
         next();

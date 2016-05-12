@@ -20,7 +20,7 @@ import java.util.List;
 abstract public class BaseSwipeDeck extends BaseListView {
 
 
-    private ProgressBar mProgressBar;
+    private View mProgressBar;
     private SwipeDeck swipeDeck;
     private List<Object> dataSwiped;
     protected void garbageCollectorCall()
@@ -73,7 +73,7 @@ abstract public class BaseSwipeDeck extends BaseListView {
 
 
         if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= (ProgressBar)mRootView.findViewById(R.id.progressBar);
+            mProgressBar= mRootView.findViewById(R.id.progressBar);
 
         swipeDeck.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override

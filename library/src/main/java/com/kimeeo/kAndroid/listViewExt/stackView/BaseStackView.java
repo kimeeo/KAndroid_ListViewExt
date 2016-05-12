@@ -23,7 +23,7 @@ abstract public class BaseStackView extends BaseListView {
     private boolean firstDataIn = true;
 
 
-    private ProgressBar mProgressBar;
+    private View mProgressBar;
     private StackView mStackView;
     protected void garbageCollectorCall()
     {
@@ -84,7 +84,7 @@ abstract public class BaseStackView extends BaseListView {
 
 
         if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= (ProgressBar)mRootView.findViewById(R.id.progressBar);
+            mProgressBar= mRootView.findViewById(R.id.progressBar);
 
 
 

@@ -21,7 +21,7 @@ abstract public class BaseCarouselView extends BaseListView
     private CoverFlowCarousel mCoverFlow;
     private boolean firstItemIn = false;
     private boolean firstDataIn = true;
-    ProgressBar mProgressBar;
+    View mProgressBar;
 
 
     protected void garbageCollectorCall() {
@@ -82,7 +82,7 @@ abstract public class BaseCarouselView extends BaseListView
         mCoverFlow.setSpacing(0.5f);
 
         if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= (ProgressBar)mRootView.findViewById(R.id.progressBar);
+            mProgressBar=mRootView.findViewById(R.id.progressBar);
 
         configListView(mCoverFlow, mAdapter);
 

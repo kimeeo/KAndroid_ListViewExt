@@ -27,9 +27,9 @@ abstract public class BaseFlipView extends BaseListView {
     private boolean loadingNextData = false;
     private boolean firstItemIn = false;
 
-    private ProgressBar mProgressBar;
-    private ProgressBar mProgressBarBottom;
-    private ProgressBar mProgressBarTop;
+    private View mProgressBar;
+    private View mProgressBarBottom;
+    private View mProgressBarTop;
     private FlipView mFlipView;
 
     public String getOrientation() {
@@ -85,13 +85,13 @@ abstract public class BaseFlipView extends BaseListView {
 
 
         if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= (ProgressBar)mRootView.findViewById(R.id.progressBar);
+            mProgressBar= mRootView.findViewById(R.id.progressBar);
 
         if(mRootView.findViewById(R.id.progressBarTop)!=null)
-            mProgressBarTop= (ProgressBar)mRootView.findViewById(R.id.progressBarTop);
+            mProgressBarTop= mRootView.findViewById(R.id.progressBarTop);
 
         if(mRootView.findViewById(R.id.progressBarBottom)!=null)
-            mProgressBarBottom= (ProgressBar)mRootView.findViewById(R.id.progressBarBottom);
+            mProgressBarBottom= mRootView.findViewById(R.id.progressBarBottom);
 
         if(getDataProvider().getRefreshEnabled())
         {
