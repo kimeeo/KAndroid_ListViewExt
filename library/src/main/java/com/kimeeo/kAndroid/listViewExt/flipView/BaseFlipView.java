@@ -1,11 +1,11 @@
 package com.kimeeo.kAndroid.listViewExt.flipView;
 
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.kimeeo.kAndroid.listViewExt.R;
 import com.kimeeo.kAndroid.listViews.listView.BaseListView;
@@ -54,14 +54,39 @@ abstract public class BaseFlipView extends BaseListView {
     {
         View rootView;
         if(getOrientation()==ORIENTATION_HORIZONTAL)
-            rootView = inflater.inflate(R.layout._fragment_flip_horizontal_page_view, container, false);
+            rootView = inflater.inflate(getRootHorizontalLayoutResID(), container, false);
         else
-            rootView = inflater.inflate(R.layout._fragment_flip_vertical_page_view, container, false);
+            rootView = inflater.inflate(getRootVerticalLayoutResID(), container, false);
         return rootView;
     }
+
+    @LayoutRes
+    protected int getRootVerticalLayoutResID() {
+        return R.layout._fragment_flip_vertical_page_view;
+    }
+    @LayoutRes
+    protected int getRootHorizontalLayoutResID() {
+        return R.layout._fragment_flip_horizontal_page_view;
+    }
+    @IdRes
+    protected int getProgressBarResID() {
+        return  R.id.progressBar;
+    }
+    @IdRes
+    protected int getProgressBarTopResID() {
+        return R.id.progressBarTop;
+    }
+
+    @IdRes
+    protected int getProgressBarBottomResID() {
+        return R.id.progressBarBottom;
+    }
+
+
+
     protected FlipView createFlipView(View rootView)
     {
-        return (FlipView) rootView.findViewById(R.id.listView);
+        return (FlipView) rootView.findViewById(getListViewResID());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -84,14 +109,9 @@ abstract public class BaseFlipView extends BaseListView {
         //setOnScrollListener(recyclerView);
 
 
-        if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= mRootView.findViewById(R.id.progressBar);
-
-        if(mRootView.findViewById(R.id.progressBarTop)!=null)
-            mProgressBarTop= mRootView.findViewById(R.id.progressBarTop);
-
-        if(mRootView.findViewById(R.id.progressBarBottom)!=null)
-            mProgressBarBottom= mRootView.findViewById(R.id.progressBarBottom);
+        mProgressBar= mRootView.findViewById(getProgressBarResID());
+        mProgressBarTop= mRootView.findViewById(getProgressBarTopResID());
+        mProgressBarBottom= mRootView.findViewById(getProgressBarBottomResID());
 
         if(getDataProvider().getRefreshEnabled())
         {

@@ -1,6 +1,8 @@
 package com.kimeeo.kAndroid.listViewExt.swipeDeck;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +36,30 @@ abstract public class BaseSwipeDeck extends BaseListView {
     protected View createRootView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         if(getDataProvider().getRefreshEnabled())
-            return inflater.inflate(R.layout._fragment_swipe_deck_view_with_swipe_refresh_layout, container, false);
+            return inflater.inflate(getRootRefreshLayoutResID(), container, false);
         else
-            return inflater.inflate(R.layout._fragment_swipe_deck_view, container, false);
+            return inflater.inflate(getRootLayoutResID(), container, false);
     }
+
+    @Override
+    @LayoutRes
+    protected int getRootRefreshLayoutResID() {
+        return R.layout._fragment_swipe_deck_view_with_swipe_refresh_layout;
+    }
+    @Override
+    @LayoutRes
+    protected int getRootLayoutResID() {
+        return R.layout._fragment_swipe_deck_view;
+    }
+    @IdRes
+    protected int getProgressBarResID() {
+        return  R.id.progressBar;
+    }
+
+
     protected com.daprlabs.cardstack.SwipeDeck createSwipeDeckView(View rootView)
     {
-        return (SwipeDeck) rootView.findViewById(R.id.listView);
+        return (SwipeDeck) rootView.findViewById(getListViewResID());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -72,8 +91,7 @@ abstract public class BaseSwipeDeck extends BaseListView {
             swipeDeck.setLeftImage(leftHint);
 
 
-        if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= mRootView.findViewById(R.id.progressBar);
+        mProgressBar= mRootView.findViewById(getProgressBarResID());
 
         swipeDeck.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override

@@ -2,11 +2,11 @@ package com.kimeeo.kAndroid.listViewExt.carouselView;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
 import com.kimeeo.kAndroid.listViewExt.R;
 import com.kimeeo.kAndroid.listViews.listView.BaseListView;
 import com.kimeeo.kAndroid.listViews.listView.BaseListViewAdapter;
@@ -36,11 +36,26 @@ abstract public class BaseCarouselView extends BaseListView
     protected View createRootView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView;
         if(getDataProvider().getRefreshEnabled())
-            rootView= inflater.inflate(R.layout._fragment_cover_flow_page_view_with_swipe_refresh_layout, container, false);
+            rootView= inflater.inflate(getRootRefreshLayoutResID(), container, false);
         else
-            rootView= inflater.inflate(R.layout._fragment_cover_flow_page_view, container, false);
+            rootView= inflater.inflate(getRootLayoutResID(), container, false);
         return rootView;
     }
+    @Override
+    @LayoutRes
+    protected int getRootRefreshLayoutResID() {
+        return R.layout._fragment_cover_flow_page_view_with_swipe_refresh_layout;
+    }
+    @Override
+    @LayoutRes
+    protected int getRootLayoutResID() {
+        return R.layout._fragment_cover_flow_page_view;
+    }
+    @IdRes
+    protected int getProgressBarResID() {
+        return  R.id.progressBar;
+    }
+
 
     public CoverFlowCarousel getCoverFlow() {
         return mCoverFlow;
@@ -81,8 +96,8 @@ abstract public class BaseCarouselView extends BaseListView
 
         mCoverFlow.setSpacing(0.5f);
 
-        if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar=mRootView.findViewById(R.id.progressBar);
+        if(mRootView.findViewById(getProgressBarResID())!=null)
+            mProgressBar=mRootView.findViewById(getProgressBarResID());
 
         configListView(mCoverFlow, mAdapter);
 
@@ -101,7 +116,7 @@ abstract public class BaseCarouselView extends BaseListView
 
     protected CoverFlowCarousel createCoverFlowCarouselView(View rootView)
     {
-        return (CoverFlowCarousel) rootView.findViewById(R.id.listView);
+        return (CoverFlowCarousel) rootView.findViewById(getListViewResID());
     }
 
 

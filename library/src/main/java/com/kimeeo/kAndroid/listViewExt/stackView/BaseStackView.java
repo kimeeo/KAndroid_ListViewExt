@@ -2,11 +2,12 @@ package com.kimeeo.kAndroid.listViewExt.stackView;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
 import android.widget.StackView;
 
 import com.kimeeo.kAndroid.listViewExt.R;
@@ -35,13 +36,26 @@ abstract public class BaseStackView extends BaseListView {
     protected View createRootView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         if(getDataProvider().getRefreshEnabled())
-            return inflater.inflate(R.layout._fragment_stack_view_with_swipe_refresh_layout, container, false);
+            return inflater.inflate(getRootRefreshLayoutResID(), container, false);
         else
-            return inflater.inflate(R.layout._fragment_stack_view, container, false);
+            return inflater.inflate(getRootLayoutResID(), container, false);
     }
+    @LayoutRes
+    protected int getRootRefreshLayoutResID() {
+        return R.layout._fragment_stack_view_with_swipe_refresh_layout;
+    }
+    @LayoutRes
+    protected int getRootLayoutResID() {
+        return R.layout._fragment_stack_view;
+    }
+    @IdRes
+    protected int getProgressBarResID() {
+        return  R.id.progressBar;
+    }
+
     protected StackView createStackView(View rootView)
     {
-        return (StackView) rootView.findViewById(R.id.listView);
+        return (StackView) rootView.findViewById(getListViewResID());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -83,8 +97,7 @@ abstract public class BaseStackView extends BaseListView {
         configmStackView(mStackView, mAdapter);
 
 
-        if(mRootView.findViewById(R.id.progressBar)!=null)
-            mProgressBar= mRootView.findViewById(R.id.progressBar);
+        mProgressBar= mRootView.findViewById(getProgressBarResID());
 
 
 

@@ -2,6 +2,8 @@ package com.kimeeo.kAndroid.listViewExt.mosaicList;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,14 +42,28 @@ abstract public class BaseMosaicList extends BaseListView implements OnItemClick
     protected View createRootView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView;
         if(getDataProvider().getRefreshEnabled())
-            rootView = inflater.inflate(R.layout._fragment_mocaic_page_view_with_swipe_refresh_layout, container, false);
+            rootView = inflater.inflate(getRootRefreshLayoutResID(), container, false);
         else
-            rootView = inflater.inflate(R.layout._fragment_mocaic_page_view, container, false);
+            rootView = inflater.inflate(getRootLayoutResID(), container, false);
         return rootView;
     }
 
+    @LayoutRes
+    protected int getRootRefreshLayoutResID() {
+        return R.layout._fragment_mocaic_page_view_with_swipe_refresh_layout;
+    }
+    @LayoutRes
+    protected int getRootLayoutResID() {
+        return R.layout._fragment_mocaic_page_view;
+    }
+    @IdRes
+    protected int getProgressBarResID() {
+        return  R.id.progressBar;
+    }
+
+
     protected MosaicLayout createMosaicLayout(View rootView) {
-        return (MosaicLayout) rootView.findViewById(R.id.listView);
+        return (MosaicLayout) rootView.findViewById(getListViewResID());
     }
 
     @Override
@@ -68,8 +84,8 @@ abstract public class BaseMosaicList extends BaseListView implements OnItemClick
         configMosaicLayout(mMosaicLayout, mAdapter);
 
 
-        if (mRootView.findViewById(R.id.progressBar) != null)
-            mProgressBar = mRootView.findViewById(R.id.progressBar);
+        if (mRootView.findViewById(getProgressBarResID()) != null)
+            mProgressBar = mRootView.findViewById(getProgressBarResID());
 
 
         next();
