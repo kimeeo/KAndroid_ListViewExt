@@ -25,6 +25,6 @@ public class SwipeDeck extends DefaultSwipeDeck {
     @Override
     protected DataProvider createDataProvider()
     {
-        return new StaticDataProvider1(false,false,4);
+        return new StaticDataProvider1(true,false,4);
     }
 }
