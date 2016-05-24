@@ -17,10 +17,11 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:layout_margin="5dp"
+        android:visibility="gone"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        />
 
 
     <ProgressBar
@@ -28,10 +29,11 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:layout_margin="5dp"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        />
 
 
     <se.emilsjolander.flipview.FlipView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,4 +58,6 @@
 
 
     <include layout="@layout/_fragment_recycler_empty_view"/>
+
+
 </RelativeLayout>

@@ -16,10 +16,14 @@ import com.kimeeo.kAndroid.listViews.listView.IViewProvider;
 abstract public class DefaultCarouselView extends BaseCarouselView implements IViewProvider {
     abstract public View getItemView(int viewType,LayoutInflater inflater,ViewGroup container);
     abstract public BaseItemHolder getItemHolder(int viewType, View view);
-    abstract public int getTotalViewTypeCount();
-    abstract public int getListItemViewType(int viewType,Object data);
-
-
+    @Override
+    public int getTotalViewTypeCount() {
+        return 1;
+    }
+    @Override
+    public int getListItemViewType(int viewType, Object data) {
+        return 1;
+    }
     protected BaseListViewAdapter createListViewAdapter()
     {
         return new DefaultListViewAdapter(getDataProvider(),this);

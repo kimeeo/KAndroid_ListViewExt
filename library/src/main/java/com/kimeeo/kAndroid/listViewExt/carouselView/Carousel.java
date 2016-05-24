@@ -257,8 +257,11 @@ public class Carousel extends ViewGroup {
             View oldSelected = getChildAt(oldReverseIndex);
             View newSelected = getChildAt(mReverseOrderIndex);
 
-            oldSelected.setSelected(false);
-            newSelected.setSelected(true);
+            try {
+                oldSelected.setSelected(false);
+                newSelected.setSelected(true);
+            }catch (Exception e){}
+
 
             mSelection = mFirstVisibleChild + mReverseOrderIndex;
             if (mOnItemSelectedListener != null) {

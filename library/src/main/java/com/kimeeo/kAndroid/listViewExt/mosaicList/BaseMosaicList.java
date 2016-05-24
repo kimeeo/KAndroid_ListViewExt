@@ -7,8 +7,6 @@ import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ProgressBar;
 
 import com.adhamenaya.listeners.OnItemClickListener;
 import com.adhamenaya.views.MosaicLayout;
@@ -155,7 +153,24 @@ abstract public class BaseMosaicList extends BaseListView implements OnItemClick
             mProgressBar.setVisibility(View.GONE);
         firstItemIn = true;
     }
+    public void itemsAdded(int index, List items) {
+        super.itemsAdded(index, items);
+        firstItemIn = true;
+        final Handler handler = new Handler();
+        final Runnable runnablelocal = new Runnable() {
+            @Override
+            public void run() {
 
+                mMosaicLayout.setAdapter(mAdapter);
+                mMosaicLayout.invalidate();
+                firstDataIn=false;
+            }
+        };
+        handler.postDelayed(runnablelocal, 1000);
+
+        if(mProgressBar!=null)
+            mProgressBar.setVisibility(View.GONE);
+    }
 
     public void onFetchingFinish(boolean isFetchingRefresh) {
         super.onFetchingFinish(isFetchingRefresh);

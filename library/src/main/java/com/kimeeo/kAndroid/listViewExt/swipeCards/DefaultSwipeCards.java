@@ -15,9 +15,18 @@ abstract public class DefaultSwipeCards extends BaseSwipeCards implements IViewP
 
 
     abstract public BaseItemHolder getItemHolder(int viewType, View view);
-    abstract public int getTotalViewTypeCount();
-    abstract public int getListItemViewType(int viewType,Object data);
     abstract public int getItemViewRes(int viewType,LayoutInflater inflater,ViewGroup container);
+
+    @Override
+    public int getTotalViewTypeCount() {
+        return 1;
+    }
+
+    @Override
+    public int getListItemViewType(int viewType, Object data) {
+        return 1;
+    }
+
     public View getItemView(int viewType,LayoutInflater inflater,ViewGroup container)
     {
         return inflater.inflate(getItemViewRes(viewType,inflater,container),container,false);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_carousel_view"
+        android:title="Carousel View" />
+
+    <item
+        android:id="@+id/nav_h_flip_view"
+        android:title="Flip View Horizontal" />
+
+    <item
+        android:id="@+id/nav_v_flip_view"
+        android:title="Flip View Verticle" />
+
+    <item
+        android:id="@+id/nav_mosaic"
+        android:title="mosaic" />
+
+    <item
+        android:id="@+id/nav_stack_view"
+        android:title="Stack View" />
+
+    <item
+        android:id="@+id/nav_swipe_cards"
+        android:title="Swipe Cards" />
+
+    <item
+        android:id="@+id/nav_swipe_deck"
+        android:title="Swipe Deck" />
+</menu>

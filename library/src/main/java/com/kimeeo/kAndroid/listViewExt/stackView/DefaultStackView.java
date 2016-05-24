@@ -13,8 +13,15 @@ import com.kimeeo.kAndroid.listViews.listView.DefaultListViewAdapter;
  */
 abstract public class DefaultStackView extends BaseStackView implements IViewProvider {
     abstract public BaseItemHolder getItemHolder(int viewType,View view);
-    abstract public int getTotalViewTypeCount();
-    abstract public int getListItemViewType(int viewType,Object data);
+    @Override
+    public int getTotalViewTypeCount() {
+        return 1;
+    }
+    @Override
+    public int getListItemViewType(int viewType, Object data) {
+        return 1;
+    }
+
     abstract public int getItemViewRes(int viewType,LayoutInflater inflater,ViewGroup container);
     public View getItemView(int viewType,LayoutInflater inflater,ViewGroup container)
     {

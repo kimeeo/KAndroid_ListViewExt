@@ -96,6 +96,7 @@ abstract public class BaseFlipView extends BaseListView {
         mFlipView = createFlipView(mRootView);
         mEmptyViewHelper = createEmptyViewHelper();
         mAdapter = createListViewAdapter();
+        mAdapter.supportLoader = false;
         mFlipView.setAdapter(mAdapter);
 
         mFlipView.setOnFlipListener(new FlipView.OnFlipListener() {
@@ -188,10 +189,10 @@ abstract public class BaseFlipView extends BaseListView {
         if(mProgressBar!=null && firstItemIn==false)
             mProgressBar.setVisibility(View.VISIBLE);
 
-        if(mProgressBarTop!=null && loadingRefreshData)
+        if(mProgressBarTop!=null && loadingRefreshData && firstItemIn)
             mProgressBarTop.setVisibility(View.VISIBLE);
 
-        if(mProgressBarBottom!=null && loadingNextData)
+        if(mProgressBarBottom!=null && loadingNextData && firstItemIn)
             mProgressBarBottom.setVisibility(View.VISIBLE);
     }
 
@@ -205,12 +206,18 @@ abstract public class BaseFlipView extends BaseListView {
 
     public void onFetchingEnd(List<?> dataList, boolean isFetchingRefresh) {
         super.onFetchingEnd(dataList,isFetchingRefresh);
+        firstItemIn = true;
         updateProgress(isFetchingRefresh);
     }
 
-
+    public void itemsAdded(int index, List items) {
+        super.itemsAdded(index, items);
+        firstItemIn = true;
+        updateProgress(false);
+    }
     public void onFetchingFinish(boolean isFetchingRefresh) {
         super.onFetchingFinish(isFetchingRefresh);
+        firstItemIn = true;
         updateProgress(isFetchingRefresh);
     }
     protected void updateProgress(boolean isRefreshData) {
@@ -219,7 +226,6 @@ abstract public class BaseFlipView extends BaseListView {
 
         if(mProgressBar!=null)
             mProgressBar.setVisibility(View.GONE);
-        firstItemIn = true;
 
         loadingRefreshData = false;
         loadingNextData = false;

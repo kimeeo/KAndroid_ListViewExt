@@ -19,8 +19,7 @@ import java.util.List;
 abstract public class BaseCarouselView extends BaseListView
 {
     private CoverFlowCarousel mCoverFlow;
-    private boolean firstItemIn = false;
-    private boolean firstDataIn = true;
+    private boolean firstTimeSetupDone = false;
     View mProgressBar;
 
 
@@ -64,7 +63,7 @@ abstract public class BaseCarouselView extends BaseListView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         configViewParam();
-        getDataProvider().setRefreshEnabled(false);
+        //getDataProvider().setRefreshEnabled(false);
         mRootView = createRootView(inflater, container, savedInstanceState);
 
         if(getDataProvider().getRefreshEnabled())
@@ -125,7 +124,7 @@ abstract public class BaseCarouselView extends BaseListView
 
     public void onFetchingStart(boolean isFetchingRefresh) {
         super.onFetchingStart(isFetchingRefresh);
-        if(mProgressBar!=null && firstItemIn==false)
+        if(mProgressBar!=null && firstTimeSetupDone==false)
             mProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -137,9 +136,27 @@ abstract public class BaseCarouselView extends BaseListView
         this.updateSwipeRefreshLayout(false);
         updateProgress();
     }
-
+    public void itemsAdded(int index, List items) {
+        super.itemsAdded(index, items);
+        mCoverFlow.setAdapter(mAdapter);
+        mCoverFlow.invalidate();
+        firstTimeSetupDone = true;
+    }
     public void onFetchingEnd(List<?> dataList, boolean isFetchingRefresh) {
         super.onFetchingEnd(dataList,isFetchingRefresh);
+
+        if(firstTimeSetupDone==false) {
+            final Handler handler = new Handler();
+            final Runnable runnablelocal = new Runnable() {
+                @Override
+                public void run() {
+                    mCoverFlow.setAdapter(mAdapter);
+                    mCoverFlow.invalidate();
+                    firstTimeSetupDone = true;
+                }
+            };
+            handler.postDelayed(runnablelocal, 1000);
+        }
         updateProgress();
     }
     public void onFetchingFinish(boolean isFetchingRefresh) {
@@ -147,26 +164,7 @@ abstract public class BaseCarouselView extends BaseListView
         updateProgress();
     }
     protected void updateProgress() {
-        if(firstDataIn==false) {
-            final Handler handler = new Handler();
-            final Runnable runnablelocal = new Runnable() {
-                @Override
-                public void run() {
-                    if (firstDataIn) {
-                        mCoverFlow.setAdapter(mAdapter);
-                        mCoverFlow.invalidate();
-                        firstDataIn = false;
-                    }
-                }
-            };
-            handler.postDelayed(runnablelocal, 1000);
-        }
-
         if(mProgressBar!=null)
             mProgressBar.setVisibility(View.GONE);
-        firstItemIn=true;
     }
-
-
-
 }

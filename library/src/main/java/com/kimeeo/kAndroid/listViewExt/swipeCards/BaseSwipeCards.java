@@ -1,7 +1,6 @@
 package com.kimeeo.kAndroid.listViewExt.swipeCards;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
@@ -145,7 +144,7 @@ abstract public class BaseSwipeCards extends BaseListView {
 
     public void onFetchingStart(boolean isFetchingRefresh) {
         super.onFetchingStart(isFetchingRefresh);
-        if(mProgressBar!=null && firstItemIn==false)
+        if(mProgressBar!=null &&  isFetchingRefresh==false && firstItemIn==false)
             mProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -161,7 +160,10 @@ abstract public class BaseSwipeCards extends BaseListView {
         super.onFetchingEnd(dataList,isFetchingRefresh);
         updateProgress(isFetchingRefresh);
     }
-
+    public void itemsAdded(int index, List items) {
+        super.itemsAdded(index, items);
+        updateProgress(false);
+    }
     protected void updateProgress(boolean isRefreshData) {
         if(mProgressBar!=null)
             mProgressBar.setVisibility(View.GONE);

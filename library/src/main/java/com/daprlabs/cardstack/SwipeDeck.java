@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
 import com.kimeeo.kAndroid.listViewExt.R;
+
+import java.util.ArrayList;
+
 /**
  * Created by aaron on 4/12/2015.
  */

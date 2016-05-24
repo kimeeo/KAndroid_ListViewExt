@@ -6,10 +6,11 @@ import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.kimeeo.kAndroid.listViewExt.R;
+import com.kimeeo.kAndroid.listViews.dataProvider.DataProvider;
+import com.kimeeo.kAndroid.listViews.dataProvider.StaticDataProvider;
 import com.kimeeo.kAndroid.listViews.listView.BaseListView;
 import com.kimeeo.kAndroid.listViews.listView.BaseListViewAdapter;
 
@@ -25,6 +26,17 @@ abstract public class BaseSwipeDeck extends BaseListView {
     private View mProgressBar;
     private SwipeDeck swipeDeck;
     private List<Object> dataSwiped;
+
+    public DataProvider getDataSwipedLeft() {
+        return dataSwipedLeft;
+    }
+
+    public DataProvider getDataSwipedRight() {
+        return dataSwipedRight;
+    }
+
+    private DataProvider dataSwipedLeft;
+    private DataProvider dataSwipedRight;
     protected void garbageCollectorCall()
     {
         super.garbageCollectorCall();
@@ -74,6 +86,8 @@ abstract public class BaseSwipeDeck extends BaseListView {
         mAdapter.supportLoader=false;
 
         dataSwiped = new ArrayList<>();
+        dataSwipedLeft= new StaticDataProvider();
+        dataSwipedRight= new StaticDataProvider();
 
         swipeDeck.setAdapter(mAdapter);
         swipeDeck.setHardwareAccelerationEnabled(true);
@@ -97,18 +111,18 @@ abstract public class BaseSwipeDeck extends BaseListView {
             @Override
             public void cardSwipedLeft(int position) {
                 dataSwiped.add(getDataProvider().get(position));
+                dataSwipedLeft.add(getDataProvider().get(position));
                 leftCardExit(getDataProvider().get(position));
-                if(getDataProvider().size()==dataSwiped.size() && getDataProvider().getCanLoadNext())
+                if(getDataProvider().size()==(dataSwiped.size()+2) && getDataProvider().getCanLoadNext())
                     emptyAndLoadNext();
-
             }
 
             @Override
             public void cardSwipedRight(int position) {
                 dataSwiped.add(getDataProvider().get(position));
+                dataSwipedRight.add(getDataProvider().get(position));
                 rightCardExit(getDataProvider().get(position));
-
-                if(getDataProvider().size()== dataSwiped.size() && getDataProvider().getCanLoadNext())
+                if(getDataProvider().size()== (dataSwiped.size()+2) && getDataProvider().getCanLoadNext())
                     emptyAndLoadNext();
             }
 
@@ -173,11 +187,11 @@ abstract public class BaseSwipeDeck extends BaseListView {
 
 
 
-    private boolean firstItemIn = false;
 
+    private boolean firstItemIn = false;
     public void onFetchingStart(boolean isFetchingRefresh) {
         super.onFetchingStart(isFetchingRefresh);
-        if(mProgressBar!=null && firstItemIn==false)
+        if(mProgressBar!=null && isFetchingRefresh==false)
             mProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -192,10 +206,20 @@ abstract public class BaseSwipeDeck extends BaseListView {
     public void onFetchingEnd(List<?> dataList, boolean isFetchingRefresh) {
         super.onFetchingEnd(dataList,isFetchingRefresh);
         updateProgress(isFetchingRefresh);
-    }
-
-    protected void updateProgress(boolean isRefreshData) {
+        if(isFetchingRefresh==false) {
+            getDataProvider().add(new FakeItem());
+            getDataProvider().add(new FakeItem());
+        }
         swipeDeck.setAdapter(mAdapter);
+    }
+    public void itemsAdded(int index, List items) {
+        super.itemsAdded(index, items);
+        updateProgress(false);
+        if(mAdapter!=null)
+            mAdapter.notifyDataSetChanged();
+    }
+    protected void updateProgress(boolean isRefreshData) {
+
         if(mProgressBar!=null)
             mProgressBar.setVisibility(View.GONE);
         firstItemIn = true;
@@ -206,4 +230,6 @@ abstract public class BaseSwipeDeck extends BaseListView {
             mProgressBar.setVisibility(View.GONE);
         firstItemIn = true;
     }
+
+    public class FakeItem {}
 }
