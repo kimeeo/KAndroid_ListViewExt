@@ -15,7 +15,7 @@ import com.kimeeo.kAndroid.listViews.listView.BaseItemHolder;
 public class CarouselView extends DefaultCarouselView{
     @Override
     public View getItemView(int viewType, LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.sample_list_view_item,container,false);
+        return inflater.inflate(R.layout.sample_list_view_item_card_view,container,false);
     }
 
     @Override

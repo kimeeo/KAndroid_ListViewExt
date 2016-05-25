@@ -15,7 +15,7 @@ import com.kimeeo.kAndroid.listViews.listView.BaseItemHolder;
 public class SwipeDeck extends DefaultSwipeDeck {
     @Override
     public int getItemViewRes(int viewType, LayoutInflater inflater, ViewGroup container) {
-        return R.layout.sample_list_view_item;
+        return R.layout.sample_list_view_item_card_view;
     }
     @Override
     public BaseItemHolder getCardHolder(int viewType, View view) {
