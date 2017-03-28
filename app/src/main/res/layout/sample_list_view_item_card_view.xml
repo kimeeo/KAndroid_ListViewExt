@@ -9,7 +9,7 @@
         android:layout_height="300dp">
         <RelativeLayout
             android:layout_margin="1dp"
-            android:background="#cccccc"
+            android:elevation="8dp"
 
             android:layout_width="match_parent"
             android:layout_height="300dp">
