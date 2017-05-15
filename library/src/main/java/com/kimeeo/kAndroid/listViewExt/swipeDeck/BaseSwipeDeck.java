@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.kimeeo.kAndroid.listViewExt.R;
-import com.kimeeo.kAndroid.listViews.dataProvider.DataProvider;
-import com.kimeeo.kAndroid.listViews.dataProvider.StaticDataProvider;
+import com.kimeeo.kAndroid.dataProvider.DataProvider;
+import com.kimeeo.kAndroid.dataProvider.StaticDataProvider;
 import com.kimeeo.kAndroid.listViews.listView.BaseListView;
 import com.kimeeo.kAndroid.listViews.listView.BaseListViewAdapter;
 

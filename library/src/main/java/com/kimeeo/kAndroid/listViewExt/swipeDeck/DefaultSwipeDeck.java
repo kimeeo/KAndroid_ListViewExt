@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kimeeo.kAndroid.listViewExt.R;
-import com.kimeeo.kAndroid.listViews.dataProvider.DataProvider;
+import com.kimeeo.kAndroid.dataProvider.DataProvider;
 import com.kimeeo.kAndroid.listViews.listView.BaseItemHolder;
 import com.kimeeo.kAndroid.listViews.listView.BaseListViewAdapter;
 import com.kimeeo.kAndroid.listViews.listView.DefaultListViewAdapter;
