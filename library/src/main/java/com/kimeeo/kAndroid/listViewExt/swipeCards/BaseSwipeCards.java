@@ -66,7 +66,7 @@ abstract public class BaseSwipeCards extends BaseListView {
         mFlingAdapterView = createFlingAdapterView(mRootView);
         mEmptyViewHelper = createEmptyViewHelper();
         mAdapter = createListViewAdapter();
-        mAdapter.supportLoader=false;
+        mAdapter.setSupportLoader(false);
 
 
 

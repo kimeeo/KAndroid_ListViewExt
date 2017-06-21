@@ -96,7 +96,7 @@ abstract public class BaseFlipView extends BaseListView {
         mFlipView = createFlipView(mRootView);
         mEmptyViewHelper = createEmptyViewHelper();
         mAdapter = createListViewAdapter();
-        mAdapter.supportLoader = false;
+        mAdapter.setSupportLoader(false);
         mFlipView.setAdapter(mAdapter);
 
         mFlipView.setOnFlipListener(new FlipView.OnFlipListener() {

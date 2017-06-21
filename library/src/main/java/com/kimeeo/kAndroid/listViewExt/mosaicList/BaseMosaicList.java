@@ -74,7 +74,7 @@ abstract public class BaseMosaicList extends BaseListView implements OnItemClick
         mMosaicLayout = createMosaicLayout(mRootView);
         mEmptyViewHelper = createEmptyViewHelper();
         mAdapter = createListViewAdapter();
-        mAdapter.supportLoader = false;
+        mAdapter.setSupportLoader(false);
 
         mMosaicLayout.setOnItemClickListener(this);
         setOnScrollListener(mMosaicLayout);

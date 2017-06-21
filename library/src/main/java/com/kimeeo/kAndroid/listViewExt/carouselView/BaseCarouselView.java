@@ -73,7 +73,7 @@ abstract public class BaseCarouselView extends BaseListView
         mEmptyViewHelper = createEmptyViewHelper();
 
         mAdapter = createListViewAdapter();
-        mAdapter.supportLoader=false;
+        mAdapter.setSupportLoader(false);
 
         mCoverFlow.setOnItemSelectedListener(new CoverFlowCarousel.OnItemSelectedListener() {
             public void onItemSelected(View child, int position) {

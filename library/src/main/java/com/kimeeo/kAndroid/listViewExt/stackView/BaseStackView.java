@@ -67,7 +67,7 @@ abstract public class BaseStackView extends BaseListView {
         mStackView = createStackView(mRootView);
         mEmptyViewHelper = createEmptyViewHelper();
         mAdapter = createListViewAdapter();
-        mAdapter.supportLoader=false;
+        mAdapter.setSupportLoader(false);
         getDataProvider().setRefreshEnabled(false);
         mStackView.setAdapter(mAdapter);
 

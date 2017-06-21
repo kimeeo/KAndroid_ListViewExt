@@ -83,7 +83,7 @@ abstract public class BaseSwipeDeck extends BaseListView {
         swipeDeck = createSwipeDeckView(mRootView);
         mEmptyViewHelper = createEmptyViewHelper();
         mAdapter = createListViewAdapter();
-        mAdapter.supportLoader=false;
+        mAdapter.setSupportLoader(false);
 
         dataSwiped = new ArrayList<>();
         dataSwipedLeft= new StaticDataProvider();
